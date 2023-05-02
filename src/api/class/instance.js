@@ -368,16 +368,36 @@ class WhatsAppInstance {
         if (id.includes('@g.us')) return true
         const [result] = await this.instance.sock?.onWhatsApp(id)
         if (result?.exists) return true
-        throw new Error('no account exists')
+        throw new Error('no account exists: ',id)
     }
 
     async sendTextMessage(to, message) {
-        await this.verifyId(this.getWhatsAppId(to))
-        const data = await this.instance.sock?.sendMessage(
-            this.getWhatsAppId(to),
-            { text: message }
-        )
-        return data
+        // Convert comma-separated string to array
+          if (typeof to === 'string') {
+            to = to.split(',').map((number) => number.trim());
+          }
+
+          if (Array.isArray(to)) {
+            // Send message to multiple numbers
+            const promises = [];
+            for (const number of to) {
+              await this.verifyId(this.getWhatsAppId(number));
+              promises.push(this.instance.sock?.sendMessage(
+                this.getWhatsAppId(number),
+                { text: message }
+              ));
+            }
+            const results = await Promise.all(promises);
+            return results;
+          } else {
+            // Send message to one number
+            await this.verifyId(this.getWhatsAppId(to));
+            const data = await this.instance.sock?.sendMessage(
+              this.getWhatsAppId(to),
+              { text: message }
+            );
+            return data;
+          }
     }
 
     async sendMediaFile(to, file, type, caption = '', filename) {

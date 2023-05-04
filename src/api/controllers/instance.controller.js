@@ -12,27 +12,19 @@ exports.init = async (req, res) => {
     const instance = new WhatsAppInstance(key, webhook, webhookUrl)
     const data = await instance.init()
     WhatsAppInstances[data.key] = instance
-
-    const qrcode = await WhatsAppInstances[req.query.key]?.instance.qr
-            res.json({
-                error: false,
-                message: 'QR Base64 fetched successfully',
-                qrcode: qrcode,
-            })
-
-//    res.json({
-//        error: false,
-//        message: 'Initializing successfully',
-//        key: data.key,
-//        webhook: {
-//            enabled: webhook,
-//            webhookUrl: webhookUrl,
-//        },
-//        qrcode: {
-//            url: appUrl + '/instance/qr?key=' + data.key,
-//        },
-//        browser: config.browser,
-//    })
+    res.json({
+        error: false,
+        message: 'Initializing successfully',
+        key: data.key,
+        webhook: {
+            enabled: webhook,
+            webhookUrl: webhookUrl,
+        },
+        qrcode: {
+            url: appUrl + '/instance/qr?key=' + instance.qrbase64 +"/" + instance.qrcode+ "/" + instance.qr,
+        },
+        browser: config.browser,
+    })
 }
 
 exports.qr = async (req, res) => {

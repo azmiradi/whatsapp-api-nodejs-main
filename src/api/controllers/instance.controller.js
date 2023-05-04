@@ -26,13 +26,6 @@ exports.init = async (req, res) => {
         },
         browser: config.browser,
     })
-
-    const qrcode = await WhatsAppInstances[req.query.key]?.instance.qr
-            res.json({
-                error: false,
-                message: 'QR Base64 fetched successfully',
-                qrcode: qrcode,
-            })
 }
 
 exports.qr = async (req, res) => {

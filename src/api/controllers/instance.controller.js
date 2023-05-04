@@ -14,7 +14,7 @@ exports.init = async (req, res) => {
     WhatsAppInstances[data.key] = instance
     res.json({
         error: false,
-        message: 'Initializing successfully',
+        message: 'Congratulations Initializing successfully',
         key: data.key,
         webhook: {
             enabled: webhook,

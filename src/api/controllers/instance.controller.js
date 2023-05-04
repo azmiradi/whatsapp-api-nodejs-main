@@ -22,7 +22,7 @@ exports.init = async (req, res) => {
             webhookUrl: webhookUrl,
         },
         qrcode: {
-            url: appUrl + '/instance/qr?key=' + instance.qr,
+            url: appUrl + '/instance/qr?key=' + data.instance.qr,
         },
         browser: config.browser,
     })

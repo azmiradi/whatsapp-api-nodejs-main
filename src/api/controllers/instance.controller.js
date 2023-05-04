@@ -15,7 +15,7 @@ exports.init = async (req, res) => {
 
     res.json({
         error: false,
-        message: 'Initializing successfully' + await exports.qrbase64(req, res),
+        message: 'Initializing successfully',
         key: data.key,
         webhook: {
             enabled: webhook,
@@ -25,8 +25,7 @@ exports.init = async (req, res) => {
             url: appUrl + '/instance/qr?key=' + data.key,
         },
         browser: config.browser,
-        qr:await exports.qrbase64(req, res)
-    })
+     })
 }
 
 exports.qr = async (req, res) => {

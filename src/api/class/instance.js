@@ -33,7 +33,7 @@ class WhatsAppInstance {
     instance = {
         key: this.key,
         chats: [],
-        qr: '',
+        qr: this.qr,
         messages: [],
         qrRetry: 0,
         customWebhook: '',

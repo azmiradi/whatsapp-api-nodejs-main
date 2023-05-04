@@ -12,6 +12,7 @@ exports.init = async (req, res) => {
     const instance = new WhatsAppInstance(key, webhook, webhookUrl)
     const data = await instance.init()
     WhatsAppInstances[data.key] = instance
+    const qrCodeBase64 = await instance.getQrCodeBase64() // get base64 encoded QR code
     res.json({
         error: false,
         message: 'Initializing successfully',
@@ -20,9 +21,7 @@ exports.init = async (req, res) => {
             enabled: webhook,
             webhookUrl: webhookUrl,
         },
-        qrcode: {
-            url: appUrl + '/instance/qr?key=' + instance.qrbase64 +"/" + instance.qrcode+ "/" + instance.qr,
-        },
+        qrcode:qrCodeBase64,
         browser: config.browser,
     })
 }

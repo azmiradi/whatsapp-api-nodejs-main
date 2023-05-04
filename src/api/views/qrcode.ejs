@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>WhatsApp QrCode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>WhatsApp QR Code</title>
     <style>
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .container {
+            margin: 20px auto;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <img src="<%= qrcode %>" alt="" id="qrcode_box"/>
+    <img src="<%= qrcode %>" alt="" id="qrcode_box" />
 </div>
 </body>
 </html>
